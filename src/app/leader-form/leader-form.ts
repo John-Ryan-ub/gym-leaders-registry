@@ -16,8 +16,8 @@ export class LeaderForm implements OnInit{
   editingId = signal<string | null>(null);
 
   leadersForm = this.formBuilder.nonNullable.group({
-    name: ['', Validators.required],
-    region: ['', Validators.required],
+    name: ['', Validators.required, Validators.min(2)],
+    region: ['Kanto', Validators.required,],
     town: ['', Validators.required],
     badge: ['', Validators.required],
     specialty: ['', Validators.required],

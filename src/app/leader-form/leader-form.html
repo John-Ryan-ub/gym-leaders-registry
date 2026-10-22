@@ -1,1 +1,153 @@
-<p>leader-form works!</p>
+
+<section class="leader-registry" aria-labelledby="registry-heading">
+  <h1 id="registry-heading">Gym Leader Registry</h1>
+
+  <!-- GYM LEADER FORM -->
+  <section class="form-section" aria-labelledby="form-heading">
+    <h2 id="form-heading">
+      {{ editingId() ? 'Update Gym Leader' : 'Register Gym Leader' }}
+    </h2>
+
+    <form
+      [formGroup]="leadersForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="form-group">
+        <label for="name">Gym Leader Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="e.g. Brock"
+          required
+        />
+
+        @if (leadersForm.controls.name.touched &&
+             leadersForm.controls.name.invalid) {
+          <small class="error-message">
+            Name is required and must contain at least 2 characters.
+          </small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="region">Region</label>
+        <select id="region" formControlName="region" required>
+          <option value="Kanto">Kanto</option>
+          <option value="Johto">Johto</option>
+          <option value="Hoenn">Hoenn</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="town">Town or City</label>
+        <input
+          id="town"
+          type="text"
+          formControlName="town"
+          placeholder="e.g. Pewter City"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="badge">Badge</label>
+        <input
+          id="badge"
+          type="text"
+          formControlName="badge"
+          placeholder="e.g. Boulder Badge"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="specialty">Pokémon Specialty</label>
+        <input
+          id="specialty"
+          type="text"
+          formControlName="specialty"
+          placeholder="e.g. Rock"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="aceLevel">Ace Pokémon Level</label>
+        <input
+          id="aceLevel"
+          type="number"
+          formControlName="aceLevel"
+          min="1"
+          max="100"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="motto">Motto</label>
+        <textarea
+          id="motto"
+          formControlName="motto"
+          placeholder="Enter the Gym Leader's motto"
+          maxlength="150"
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="leadersForm.invalid">
+          {{ editingId() ? 'Update Leader' : 'Register Leader' }}
+        </button>
+
+        @if (editingId()) {
+          <button type="button" (click)="cancelEdit()">
+            Cancel
+          </button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <!-- GYM LEADER LIST -->
+  <section class="leaders-section" aria-labelledby="leaders-heading">
+    <h2 id="leaders-heading">Registered Gym Leaders</h2>
+
+    @if (leadersService.leadersList().length > 0) {
+      <div class="leaders-grid">
+        @for (leader of leadersService.leadersList(); track leader._id) {
+          <article class="leader-card">
+            <h3>{{ leader.name }}</h3>
+
+            <p><strong>Region:</strong> {{ leader.region }}</p>
+            <p><strong>Town:</strong> {{ leader.town }}</p>
+            <p><strong>Badge:</strong> {{ leader.badge }}</p>
+            <p><strong>Specialty:</strong> {{ leader.specialty }}</p>
+            <p><strong>Ace Level:</strong> {{ leader.aceLevel }}</p>
+            <p><strong>Motto:</strong> {{ leader.motto || 'No motto provided' }}</p>
+
+            <div class="card-actions">
+              <button
+                type="button"
+                (click)="startEdit(leader)"
+                [attr.aria-label]="'Edit ' + leader.name"
+              >
+                Edit
+              </button>
+
+              <button
+                type="button"
+                (click)="deleteLeaders(leader._id)"
+                [attr.aria-label]="'Delete ' + leader.name"
+              >
+                Delete
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <p>No Gym Leaders registered yet. Add one using the form above.</p>
+    }
+  </section>
+</section>
