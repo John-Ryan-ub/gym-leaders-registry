@@ -6,15 +6,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GymLeaders {
     private http = inject(HttpClient);
-    private apiURL = 'http://localhost:5000/api/pokemon';
+    private apiUrl = 'http://localhost:3000/api/pokemon';
 
-    leaderList = signal<any[]>([]);
+    leadersList = signal<any[]>([]);
 
-    fetchLeader(){
-        this.http.get<any[]>(this.apiURL).subscribe(data => this.leaderList.set(data));
+    fetchLeaders(){
+        this.http.get<any[]>(this.apiUrl).subscribe(data => this.leadersList.set(data));
     }
-    
-    saveLeader(data: any){
-        return this.http.post(this.apiURL, data);
+
+    saveLeaders(data: any){
+        return this.http.post(this.apiUrl, data);
+    }
+
+    deleteLeaders(id: string){
+        return this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => this.leadersList.update(list => list.filter(p => p._id !== id)));
+    }
+
+    updateLeaders(id: string, data: any){
+        return this.http.put(`${this.apiUrl}/${id}`, data);
     }
 }
