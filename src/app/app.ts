@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LeaderForm } from './leader-form/leader-form';
+import { Navbar } from './navbar/navbar';
 
 @Component({
-  imports: [LeaderForm],
+  imports: [Navbar, RouterOutlet],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
