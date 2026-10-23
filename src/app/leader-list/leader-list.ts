@@ -1,6 +1,7 @@
 
 import { Component, OnInit, inject, output, signal, computed } from '@angular/core';
 import { GymLeaders } from '../gym-leaders';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leader-list',
@@ -10,6 +11,13 @@ import { GymLeaders } from '../gym-leaders';
 })
 export class LeaderList implements OnInit {
   leadersService = inject(GymLeaders);
+
+  router = inject(Router);
+
+  editLeader(leader: any): void {
+  console.log('Editing leader:', leader._id);
+  this.router.navigate(['/leaders',leader._id,'edit']);
+  }
 
   editRequested = output<any>();
 
@@ -23,18 +31,13 @@ export class LeaderList implements OnInit {
       ? leaders
       : leaders.filter(leader => leader.region === region);
   });
-  
+
   setRegion(region: 'All' | 'Kanto' | 'Johto' | 'Hoenn'): void {
     this.selectedRegion.set(region);
   }
 
-
   ngOnInit(): void {
     this.leadersService.fetchLeader();
-  }
-
-  editLeader(leader: any): void {
-    this.editRequested.emit(leader);
   }
 
   deleteLeaders(id: string): void {
@@ -42,5 +45,4 @@ export class LeaderList implements OnInit {
       this.leadersService.deleteLeader(id);
     }
   }
-  
 }

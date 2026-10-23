@@ -5,9 +5,10 @@ import { LeaderList } from './leader-list/leader-list';
 import { NotFound } from './not-found/not-found';
 
 export const routes: Routes = [
-{ path: 'home', component: Home },
-{ path: 'leader/new', component: LeaderForm },
-{ path: 'leaderform', component: LeaderForm },
-{ path: 'leaderlist', component: LeaderList },
-{ path: '', component: NotFound }
+  { path: 'home', component: Home },
+  { path: 'leaderform', component: LeaderForm },
+  { path: 'leaders/:id/edit', component: LeaderForm },
+  { path: 'leaderlist', component: LeaderList },
+  { path: '', redirectTo: 'leaderlist', pathMatch: 'full' },
+  { path: '**', component: NotFound }
 ];

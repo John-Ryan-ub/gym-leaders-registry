@@ -4,7 +4,7 @@ import { LeaderForm } from '../leader-form/leader-form';
 import { NotFound } from '../not-found/not-found';
 
 @Component({
-  imports: [LeaderList, LeaderForm, NotFound],
+  imports: [],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',

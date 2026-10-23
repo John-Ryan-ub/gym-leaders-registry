@@ -29,13 +29,6 @@ export class LeaderForm implements OnInit{
     this.leadersService.fetchLeader();
   }
 
-  deleteLeader(id: string){
-    if(confirm("Are you sure you want to release this Leaders?")){
-      this.leadersService.deleteLeader(id);
-    }
-    this.leadersService.fetchLeader();
-  }
-
   startEdit(Leaders: any){
     this.editingId.set(Leaders._id);
     this.leadersForm.patchValue(Leaders);
