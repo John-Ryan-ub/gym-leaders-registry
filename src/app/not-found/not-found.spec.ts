@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LeaderCard } from './leader-card';
+import { NotFound } from './not-found';
 
-describe('LeaderCard', () => {
-  let component: LeaderCard;
-  let fixture: ComponentFixture<LeaderCard>;
+describe('NotFound', () => {
+  let component: NotFound;
+  let fixture: ComponentFixture<NotFound>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LeaderCard],
+      imports: [NotFound],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LeaderCard);
+    fixture = TestBed.createComponent(NotFound);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

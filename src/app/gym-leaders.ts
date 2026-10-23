@@ -1,6 +1,7 @@
 
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,28 @@ export class GymLeaders {
     // Store all leaders
     leaderList = signal<any[]>([]);
 
+    kantoCount = computed(() =>
+        this.leaderList().filter(leader => leader.region === 'Kanto').length
+    );
+
+    johtoCount = computed(() =>
+        this.leaderList().filter(leader => leader.region === 'Johto').length
+    );
+
+    hoennCount = computed(() =>
+        this.leaderList().filter(leader => leader.region === 'Hoenn').length
+    );
+
     // GET: Fetch all leaders
     fetchLeader() {
         this.http.get<any[]>(this.apiUrl).subscribe({
         next: (data) => this.leaderList.set(data),
         error: (err) => console.error('Failed to fetch leaders:', err)
         });
+    }
+
+    getLeader(id: string): Observable<GymLeaders> {
+        return this.http.get<GymLeaders>(`${this.apiUrl}/${id}`);
     }
 
     // POST: Add a new leader

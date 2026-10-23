@@ -1,39 +1,77 @@
 
-<section class="leaders-container">
-  <h1>Registered Gym Leaders</h1>
+<div class="leader-container">
+  <h2>Gym Leader Registry</h2>
+  <p>View and manage registered Gym Leaders.</p>
 
-  @if (leadersService.leaderList().length > 0) {
-    <div class="leaders-grid">
-      @for (leader of leadersService.leaderList(); track leader._id) {
-        <article class="leader-card">
-          <h2>{{ leader.name }}</h2>
+  <!-- Region Filter -->
+  <div class="filter-section">
+    <label for="regionFilter">Filter by Region:</label>
 
-          <p><strong>Region:</strong> {{ leader.region }}</p>
-          <p><strong>Town:</strong> {{ leader.town }}</p>
-          <p><strong>Badge:</strong> {{ leader.badge }}</p>
-          <p><strong>Specialty:</strong> {{ leader.specialty }}</p>
-          <p><strong>Ace Level:</strong> {{ leader.aceLevel }}</p>
-          <p><strong>Motto:</strong> {{ leader.motto }}</p>
+    <select
+      id="regionFilter"
+      [value]="selectedRegion()"
+      (change)="setRegion($any($event.target).value)"
+    >
+      <option value="All">All Regions</option>
+      <option value="Kanto">Kanto</option>
+      <option value="Johto">Johto</option>
+      <option value="Hoenn">Hoenn</option>
+    </select>
+  </div>
 
-          <div class="leader-actions">
-            <button
-              type="button"
-              (click)="editLeader(leader)"
-            >
-              Edit
-            </button>
+  <!-- Gym Leaders Table -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Region</th>
+          <th>Town</th>
+          <th>Badge</th>
+          <th>Specialty</th>
+          <th>Ace Level</th>
+          <th>Motto</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
 
-            <button
-              type="button"
-              (click)="deleteLeaders(leader._id)"
-            >
-              Delete
-            </button>
-          </div>
-        </article>
-      }
-    </div>
-  } @else {
-    <p>No Gym Leaders registered yet. Register one using the form.</p>
-  }
-</section>
+      <tbody>
+        @for (leader of filteredLeaders(); track leader._id) {
+          <tr>
+            <td>{{ leader.name }}</td>
+            <td>{{ leader.region }}</td>
+            <td>{{ leader.town }}</td>
+            <td>{{ leader.badge }}</td>
+            <td>{{ leader.specialty }}</td>
+            <td>{{ leader.aceLevel }}</td>
+            <td>{{ leader.motto }}</td>
+
+            <td class="actions">
+              <button
+                type="button"
+                class="edit-btn"
+                (click)="editLeader(leader)"
+              >
+                Edit
+              </button>
+
+              <button
+                type="button"
+                class="delete-btn"
+                (click)="deleteLeaders(leader._id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="empty-message">
+              No Gym Leaders found.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

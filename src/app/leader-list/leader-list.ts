@@ -1,5 +1,5 @@
 
-import { Component, OnInit, inject, output } from '@angular/core';
+import { Component, OnInit, inject, output, signal, computed } from '@angular/core';
 import { GymLeaders } from '../gym-leaders';
 
 @Component({
@@ -12,6 +12,22 @@ export class LeaderList implements OnInit {
   leadersService = inject(GymLeaders);
 
   editRequested = output<any>();
+
+  selectedRegion = signal<'All' | 'Kanto' | 'Johto' | 'Hoenn'>('All');
+
+  filteredLeaders = computed(() => {
+    const leaders = this.leadersService.leaderList();
+    const region = this.selectedRegion();
+
+    return region === 'All'
+      ? leaders
+      : leaders.filter(leader => leader.region === region);
+  });
+  
+  setRegion(region: 'All' | 'Kanto' | 'Johto' | 'Hoenn'): void {
+    this.selectedRegion.set(region);
+  }
+
 
   ngOnInit(): void {
     this.leadersService.fetchLeader();
@@ -26,4 +42,5 @@ export class LeaderList implements OnInit {
       this.leadersService.deleteLeader(id);
     }
   }
+  
 }

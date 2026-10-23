@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { LeaderCard } from '../leader-card/leader-card';
 import { LeaderList } from '../leader-list/leader-list';
 import { LeaderForm } from '../leader-form/leader-form';
+import { NotFound } from '../not-found/not-found';
 
 @Component({
-  imports: [LeaderCard, LeaderList, LeaderForm],
+  imports: [LeaderList, LeaderForm, NotFound],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',
