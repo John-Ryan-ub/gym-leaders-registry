@@ -1,0 +1,38 @@
+nav {
+  background: #333;
+  padding: 0.5rem 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0;
+}
+
+.nav-links a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  background: #ffcc00;
+  color: #222;
+}
+
+.nav-links a.active-link {
+  background: #e33535;
+  color: white;
+}

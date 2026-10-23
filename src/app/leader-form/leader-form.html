@@ -108,46 +108,4 @@
       </div>
     </form>
   </section>
-
-  <!-- GYM LEADER LIST -->
-  <section class="leaders-section" aria-labelledby="leaders-heading">
-    <h2 id="leaders-heading">Registered Gym Leaders</h2>
-
-    @if (leadersService.leadersList().length > 0) {
-      <div class="leaders-grid">
-        @for (leader of leadersService.leadersList(); track leader._id) {
-          <article class="leader-card">
-            <h3>{{ leader.name }}</h3>
-
-            <p><strong>Region:</strong> {{ leader.region }}</p>
-            <p><strong>Town:</strong> {{ leader.town }}</p>
-            <p><strong>Badge:</strong> {{ leader.badge }}</p>
-            <p><strong>Specialty:</strong> {{ leader.specialty }}</p>
-            <p><strong>Ace Level:</strong> {{ leader.aceLevel }}</p>
-            <p><strong>Motto:</strong> {{ leader.motto || 'No motto provided' }}</p>
-
-            <div class="card-actions">
-              <button
-                type="button"
-                (click)="startEdit(leader)"
-                [attr.aria-label]="'Edit ' + leader.name"
-              >
-                Edit
-              </button>
-
-              <button
-                type="button"
-                (click)="deleteLeaders(leader._id)"
-                [attr.aria-label]="'Delete ' + leader.name"
-              >
-                Delete
-              </button>
-            </div>
-          </article>
-        }
-      </div>
-    } @else {
-      <p>No Gym Leaders registered yet. Add one using the form above.</p>
-    }
-  </section>
 </section>

@@ -26,14 +26,14 @@ export class LeaderForm implements OnInit{
   });
 
   ngOnInit() {
-    this.leadersService.fetchLeaders();
+    this.leadersService.fetchLeader();
   }
 
-  deleteLeaders(id: string){
+  deleteLeader(id: string){
     if(confirm("Are you sure you want to release this Leaders?")){
-      this.leadersService.deleteLeaders(id);
+      this.leadersService.deleteLeader(id);
     }
-    this.leadersService.fetchLeaders();
+    this.leadersService.fetchLeader();
   }
 
   startEdit(Leaders: any){
@@ -55,15 +55,15 @@ export class LeaderForm implements OnInit{
     if(id){
       this.leadersService.updateLeaders(id, data).subscribe({
         next: () => {
-          this.leadersService.fetchLeaders();
+          this.leadersService.fetchLeader();
           this.cancelEdit();
         }, 
         error: (err) => console.error('Update Failed!', err)
       })
     } else {
-      this.leadersService.saveLeaders(data).subscribe({
+      this.leadersService.saveLeader(data).subscribe({
       next: () => {
-        this.leadersService.fetchLeaders();
+        this.leadersService.fetchLeader();
         this.leadersForm.reset();
       },
       error: (err) => console.error('Save failed', err)

@@ -2,9 +2,9 @@
 <section class="leaders-container">
   <h1>Registered Gym Leaders</h1>
 
-  @if (leadersService.leadersList().length > 0) {
+  @if (leadersService.leaderList().length > 0) {
     <div class="leaders-grid">
-      @for (leader of leadersService.leadersList(); track leader._id) {
+      @for (leader of leadersService.leaderList(); track leader._id) {
         <article class="leader-card">
           <h2>{{ leader.name }}</h2>
 

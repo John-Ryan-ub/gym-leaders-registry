@@ -1,28 +1,39 @@
+
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-    providedIn:'root'
+  providedIn: 'root'
 })
 export class GymLeaders {
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:3000/api/pokemon';
 
-    leadersList = signal<any[]>([]);
+    // Express backend API URL
+    private apiUrl = 'http://localhost:3000/api/leader';
 
-    fetchLeaders(){
-        this.http.get<any[]>(this.apiUrl).subscribe(data => this.leadersList.set(data));
+    // Store all leaders
+    leaderList = signal<any[]>([]);
+
+    // GET: Fetch all leaders
+    fetchLeader() {
+        this.http.get<any[]>(this.apiUrl).subscribe({
+        next: (data) => this.leaderList.set(data),
+        error: (err) => console.error('Failed to fetch leaders:', err)
+        });
     }
 
-    saveLeaders(data: any){
-        return this.http.post(this.apiUrl, data);
+    // POST: Add a new leader
+    saveLeader(data: any) {
+        return this.http.post<any>(this.apiUrl, data);
+    } 
+    
+    // DELETE: Remove a leader
+    deleteLeader(id: string){
+        return this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => this.leaderList.update(list => list.filter(p => p._id !== id)));
     }
 
-    deleteLeaders(id: string){
-        return this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => this.leadersList.update(list => list.filter(p => p._id !== id)));
-    }
-
-    updateLeaders(id: string, data: any){
-        return this.http.put(`${this.apiUrl}/${id}`, data);
-    }
+    // PUT: Update a leader
+    updateLeaders(id: string, data: any) {
+        return this.http.put<any>(`${this.apiUrl}/${id}`, data);
+    } 
 }

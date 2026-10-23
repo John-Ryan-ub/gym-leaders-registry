@@ -14,7 +14,7 @@ export class LeaderList implements OnInit {
   editRequested = output<any>();
 
   ngOnInit(): void {
-    this.leadersService.fetchLeaders();
+    this.leadersService.fetchLeader();
   }
 
   editLeader(leader: any): void {
@@ -23,7 +23,7 @@ export class LeaderList implements OnInit {
 
   deleteLeaders(id: string): void {
     if (confirm('Are you sure you want to delete this Gym Leader?')) {
-      this.leadersService.deleteLeaders(id);
+      this.leadersService.deleteLeader(id);
     }
   }
 }
