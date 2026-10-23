@@ -1,0 +1,153 @@
+.leader-container {
+  width: min(1200px, 92%);
+  margin: 36px auto;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+}
+
+.leader-container > h2 {
+  margin: 0 0 8px;
+  color: #172033;
+  font-size: clamp(25px, 3vw, 34px);
+}
+
+.leader-container > p {
+  margin: 0 0 24px;
+  color: #6b7280;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 22px 0;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+}
+
+.filter-section label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.filter-section select {
+  box-sizing: border-box;
+  min-width: 180px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  color: #1f2937;
+  font: inherit;
+  outline: none;
+}
+
+.filter-section select:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.table-container {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 18px rgba(23, 32, 51, 0.07);
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table-container th,
+.table-container td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+.table-container th {
+  background: #172033;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.table-container td {
+  font-size: 14px;
+}
+
+.table-container tbody tr:hover {
+  background: #f8fafc;
+}
+
+.table-container tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-container .actions {
+  min-width: 155px;
+  white-space: nowrap;
+}
+
+.actions button {
+  margin: 0 5px 5px 0;
+  padding: 9px 13px;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #2563eb;
+}
+
+.edit-btn:hover {
+  background: #1d4ed8;
+}
+
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+.empty-message {
+  padding: 32px !important;
+  color: #6b7280;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .leader-container {
+    width: 94%;
+    margin: 24px auto;
+  }
+
+  .filter-section {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filter-section select {
+    width: 100%;
+  }
+
+  .table-container th,
+  .table-container td {
+    padding: 12px;
+  }
+}

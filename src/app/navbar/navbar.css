@@ -1,38 +1,75 @@
-nav {
-  background: #333;
-  padding: 0.5rem 0;
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 7%;
+  background: #172033;
+  color: white;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.brand strong {
+  color: #fca5a5;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: #dc2626;
+  font-size: 22px;
+  font-weight: 800;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
   margin: 0;
   padding: 0;
-}
-
-.nav-links li {
-  margin: 0;
+  list-style: none;
 }
 
 .nav-links a {
   display: block;
-  color: white;
-  text-decoration: none;
-  padding: 12px 20px;
+  padding: 10px 15px;
   border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
 }
 
-.nav-links a:hover {
-  background: #ffcc00;
-  color: #222;
-}
-
+.nav-links a:hover,
 .nav-links a.active-link {
-  background: #e33535;
+  background: #dc2626;
   color: white;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 5%;
+  }
+
+  .nav-links a {
+    padding: 9px 11px;
+  }
 }
